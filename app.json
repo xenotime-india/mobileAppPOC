@@ -2,7 +2,7 @@
   "expo": {
     "name": "aolf-teacher-app",
     "slug": "aol-teacher-app",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "32.0.0",
     "platforms": ["ios", "android"],
     "version": "1.0.0",
@@ -16,9 +16,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": ["assets/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aolf.mobile.teacher",
+      "buildNumber": "1.0.0"
+    },
+    "android": {
+      "package": "com.aolf.mobile.teacher",
+      "versionCode": 1
     }
   }
 }
