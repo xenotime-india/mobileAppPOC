@@ -1,7 +1,6 @@
 {
   "engines": {
-    "node": ">=8.3",
-    "npm": ">=6.0.0"
+    "node": ">=8.3"
   },
   "scripts": {
     "heroku-postbuild": "./ci_set_env.sh && ./ci_publish_to_expo.sh",
