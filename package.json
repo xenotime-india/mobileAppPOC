@@ -1,4 +1,6 @@
 {
+  "name": "aolf-teacher-app",
+  "version": "1.0.0",
   "engines": {
     "node": ">=8.3"
   },
