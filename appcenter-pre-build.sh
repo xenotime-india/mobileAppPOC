@@ -9,7 +9,7 @@ set -x  # print all executed commands to the terminal
 #nvm alias default 8.11.1
 
 # Login to expo
-expo login -u $EXP_USERNAME -p $EXP_PASSWORD
+##expo login -u $EXP_USERNAME -p $EXP_PASSWORD
 
 ## Prepare detached build
 ##exp prepare-detached-build --platform ios
@@ -17,4 +17,10 @@ expo login -u $EXP_USERNAME -p $EXP_PASSWORD
 ##expo path
 
 # Deploy to the right release channel
-expo publish --release-channel $EXP_RELEASE_CHANNEL
+##expo publish --release-channel $EXP_RELEASE_CHANNEL
+
+# Login to expo
+yarn run expo login -u $EXP_USERNAME -p $EXP_PASSWORD
+
+# Deploy to the right release channel
+yarn run expo publish --release-channel $EXP_RELEASE_CHANNEL
