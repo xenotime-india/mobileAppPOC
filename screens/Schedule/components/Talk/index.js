@@ -72,7 +72,7 @@ function LightningSubtitle({ text, ...props }) {
 function KeynoteSubtitle({ text, ...props }) {
   return (
     <View style={styles.subtitle} {...props}>
-      <Indicator color={theme.color.blue} icon="ios-key" />
+      <Indicator color={theme.color.blue} icon="ios-pin" />
       <Text style={styles.subtitleText}>{text}</Text>
     </View>
   );
@@ -152,11 +152,11 @@ export default class Talk extends Component {
     if (lightning) {
       subtitle = <LightningSubtitle text={speakersText} />;
     } else if (keynote) {
-      subtitle = <KeynoteSubtitle text={startTime} />;
+      subtitle = <KeynoteSubtitle text={keynote} />;
     } else {
       subtitle = (
         <Text style={[styles.subtitle, styles.subtitleText]}>
-          TEST-{subtitleText}
+          {subtitleText}
         </Text>
       );
     }
