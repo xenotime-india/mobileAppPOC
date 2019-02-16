@@ -88,12 +88,14 @@ export class Authenticate extends React.Component {
   };
 
   navigateToMain = async current_user => {
-    const { navigation, userActions } = this.props;
-    this.setState({ loading: false });
+    const { navigation, userActions, eventActions } = this.props.screenProps;
+
     let user = {
       ...current_user
     };
     await userActions.setUser(user);
+    await eventActions.fetchEvents();
+    this.setState({ loading: false });
     navigation.navigate('Main', user);
   };
 
@@ -202,14 +204,18 @@ export class Authenticate extends React.Component {
         {!loading && result.type === 'error' && (
           <View>
             <TouchableOpacity onPress={this.signIn}>
-              <Text>An error occured. Try again?</Text>
+              <Text style={{ color: '#ffffff' }}>
+                An error occured. Try again?
+              </Text>
             </TouchableOpacity>
           </View>
         )}
         {!loading && result.type === 'cancel' && (
           <View>
             <TouchableOpacity onPress={this.signIn}>
-              <Text>You cancelled the sign-in process. Try again?</Text>
+              <Text style={{ color: '#ffffff' }}>
+                You cancelled the sign-in process. Try again?
+              </Text>
             </TouchableOpacity>
           </View>
         )}
@@ -218,4 +224,4 @@ export class Authenticate extends React.Component {
   }
 }
 
-export default defaultConnector(Authenticate);
+export default Authenticate;

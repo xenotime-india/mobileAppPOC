@@ -40,7 +40,7 @@ HomeStack.navigationOptions = {
 
 const MeetupStack = createStackNavigator(
   {
-    Meetups: { screen: Meetup, title: 'Meetups' },
+    Meetups: { screen: Meetup },
     MeetupDetail: { screen: MeetupDetails },
     NewMeetup: { screen: NewMeetup }
   },

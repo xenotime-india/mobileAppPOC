@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Details from './Details';
 import Attendees from './Attendees';
 
@@ -24,4 +24,20 @@ const TabNavigator = createMaterialTopTabNavigator(
   }
 );
 
-export default TabNavigator;
+class NavWrapper extends Component {
+  static router = TabNavigator.router;
+  render() {
+    const { navigation } = this.props;
+
+    return (
+      <TabNavigator
+        navigation={navigation}
+        screenProps={{
+          ...this.props.screenProps
+        }}
+      />
+    );
+  }
+}
+
+export default NavWrapper;

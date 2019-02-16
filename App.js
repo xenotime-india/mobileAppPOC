@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
 import { Provider } from 'react-redux';
+import { NetworkProvider } from 'react-native-offline';
 import AppNavigator from './navigation/AppNavigator';
 import configureStore from './redux/store';
 const store = configureStore();
@@ -22,12 +23,14 @@ export default class App extends React.Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <Provider store={store}>
-            <AppNavigator />
-          </Provider>
-        </View>
+        <NetworkProvider>
+          <View style={styles.container}>
+            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+            <Provider store={store}>
+              <AppNavigator />
+            </Provider>
+          </View>
+        </NetworkProvider>
       );
     }
   }

@@ -152,7 +152,7 @@ export default class SplashScreen extends Component {
                   fontSize: 17
                 }}
               >
-                Hello, {user.name}
+                {user.name}
               </Text>
             </View>
           </Animated.TouchableHighlight>

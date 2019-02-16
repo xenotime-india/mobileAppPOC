@@ -27,7 +27,7 @@ export const SELECTORS = {};
 // Store
 const initialState = {};
 
-export const STORE = (state = initialState, action) => {
+export const user = (state = initialState, action) => {
   switch (action.type) {
     case ACTION_TYPES.SET_USER:
       return { ...state, ...action.user };

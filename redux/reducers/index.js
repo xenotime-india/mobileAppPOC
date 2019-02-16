@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
-import { STORE as user } from './user';
+import { user } from './user';
+import { event } from './event';
 
 const rootReducer = combineReducers({
-  user
+  user,
+  event
 });
 
 export default rootReducer;

@@ -14,7 +14,10 @@ function baselineMiddleware() {
 }
 
 export default initialState => {
-  const enhancers = composeWithDevTools(baselineMiddleware());
+  const enhancers =
+    REACT_APP_REDUX_DEBUGGING_ENABLED === 'true'
+      ? composeWithDevTools(baselineMiddleware())
+      : baselineMiddleware();
   const store = createStore(rootReducer, initialState, enhancers);
   return store;
 };

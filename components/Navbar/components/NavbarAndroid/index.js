@@ -29,7 +29,6 @@ export default function NavbarAndroid({
   titleRenderer,
   ...props
 }) {
-  console.log('android navbar');
   return (
     <View {...props}>
       <View style={{ height: theme.navbar.height }} />
