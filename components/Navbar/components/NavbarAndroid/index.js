@@ -14,7 +14,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../../../../theme';
 
 export default function NavbarAndroid({
-  backgroundColor = '#1C90D4',
+  backgroundColor = '#4b5487',
   buttonColor = 'rgba(0, 0, 0, 0.5)',
   leftButtonDisabled,
   leftButtonIconName,

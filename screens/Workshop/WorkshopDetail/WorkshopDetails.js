@@ -28,7 +28,7 @@ import Avatar from '../../../components/Avatar';
 import moment from 'moment';
 import markerImg from '../../../assets/images/map-pin.png';
 
-export default class Details extends React.Component {
+export default class WorkshopDetails extends React.Component {
   state = {
     loading: false,
     data: [],
@@ -78,11 +78,11 @@ export default class Details extends React.Component {
   render() {
     const { navigation, screenProps } = this.props;
     const { user } = screenProps;
-    const meetup = navigation.getParam('meetup', {});
+    const workshop = navigation.getParam('workshop', {});
     const {
       sfid,
       accessible,
-      meetupTitle,
+      title,
       meetupType,
       meetupDuration,
       maxAttendees,
@@ -111,7 +111,7 @@ export default class Details extends React.Component {
       city,
       streetAddress1,
       streetAddress2
-    } = meetup || {};
+    } = workshop || {};
     const mapRegion = {
       latitude: meetupGeoLat,
       longitude: meetupGeoLon,
@@ -136,30 +136,23 @@ export default class Details extends React.Component {
                 ref={r => {
                   this._marker = r;
                 }}
-                title={meetupTitle}
+                title={title}
                 image={markerImg}
               />
             </MapView>
             <List>
               <ListItem>
                 <Body>
-                  <Text style={styles.label}>Meetup Name</Text>
+                  <Text style={styles.label}>Workshop Name</Text>
                   <Text note style={styles.text}>
-                    {meetupTitle}
+                    {title}
                   </Text>
                 </Body>
               </ListItem>
+
               <ListItem>
                 <Body>
-                  <Text style={styles.label}>Meetup Type</Text>
-                  <Text note style={styles.text}>
-                    {meetupType}
-                  </Text>
-                </Body>
-              </ListItem>
-              <ListItem>
-                <Body>
-                  <Text style={styles.label}>Meetup Duration</Text>
+                  <Text style={styles.label}>Workshop Duration</Text>
                   <Text note style={styles.text}>
                     {meetupDuration} Minutes
                   </Text>
@@ -286,14 +279,6 @@ export default class Details extends React.Component {
             onPress={() => this.setState({ active: !this.state.active })}
           >
             <Icon name="menu" />
-            <Button
-              style={{ backgroundColor: '#4b5487' }}
-              onPress={() =>
-                this.props.navigation.navigate('NewMeetup', { meetup })
-              }
-            >
-              <Icon type="FontAwesome" name="edit" />
-            </Button>
             <Button
               style={{ backgroundColor: '#4b5487' }}
               onPress={() => this.setState({ barcodeModalVisible: true })}

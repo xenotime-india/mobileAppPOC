@@ -47,7 +47,7 @@ export default class UserInfoModal extends Component {
             <View
               style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
             >
-              <Avatar source={{ uri: user.userProfilePic }} />
+              <Avatar source={user.userProfilePic} />
               <Text style={[styles.heading, styles.heading1]}>{user.name}</Text>
             </View>
             <View>

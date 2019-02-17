@@ -6,11 +6,11 @@ import {
 } from 'react-navigation';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../screens/HomeScreen';
 import Meetup from '../screens/Meetup';
+import Workshop from '../screens/Workshop';
 import NewMeetup from '../screens/Meetup/Detail/NewMeetup';
 import MeetupDetails from '../screens/Meetup/Detail';
-import SettingsScreen from '../screens/SettingsScreen';
+import WorkshopDetails from '../screens/Workshop/WorkshopDetail';
 import Schedule from '../screens/Schedule';
 
 const HomeStack = createStackNavigator(
@@ -65,11 +65,23 @@ MeetupStack.navigationOptions = {
   )
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen
-});
+const WorkshopStack = createStackNavigator(
+  {
+    Workshops: { screen: Workshop },
+    WorkshopDetail: { screen: WorkshopDetails }
+  },
+  {
+    initialRouteName: 'Workshops',
+    defaultNavigationOptions: {
+      headerStyle: {
+        backgroundColor: '#c15b5b'
+      },
+      headerTintColor: '#fff'
+    }
+  }
+);
 
-SettingsStack.navigationOptions = {
+WorkshopStack.navigationOptions = {
   tabBarLabel: 'Workshops',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -83,7 +95,7 @@ export default createBottomTabNavigator(
   {
     HomeStack,
     MeetupStack,
-    SettingsStack
+    WorkshopStack
   },
   {
     tabBarOptions: {

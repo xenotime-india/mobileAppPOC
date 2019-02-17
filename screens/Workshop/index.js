@@ -19,21 +19,11 @@ import {
   Input,
   Icon
 } from 'native-base';
-import meetupthumb from './../../assets/images/meet-ups-pic-4.png';
+import workshopthumb from './../../assets/images/workshop-img1.png';
 
-export default class Meetup extends React.Component {
+class Workshop extends React.Component {
   static navigationOptions = ({ navigate, navigation }) => ({
-    headerTitle: 'Meetups',
-    headerRight: (
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('NewMeetup');
-        }}
-        style={{ marginRight: 10 }}
-      >
-        <Text style={{ color: '#ffffff' }}>New</Text>
-      </TouchableOpacity>
-    )
+    headerTitle: 'Workshops'
   });
 
   state = {
@@ -81,7 +71,7 @@ export default class Meetup extends React.Component {
 
   openDetail = item => () => {
     const { navigation } = this.props;
-    navigation.navigate('MeetupDetail', { meetup: item });
+    navigation.navigate('WorkshopDetail', { workshop: item });
   };
 
   renderHeader = () => {
@@ -118,12 +108,12 @@ export default class Meetup extends React.Component {
   };
 
   getmeetupData = events =>
-    events.filter(({ eventType, meetupTitle }) => {
+    events.filter(({ eventType, title }) => {
       const { search } = this.state;
       if (search.length === 0) {
-        return eventType === 'Meetup';
+        return eventType === 'Workshop';
       } else {
-        return eventType === 'Meetup' && meetupTitle.indexOf(search) >= 0;
+        return eventType === 'Workshop' && title.indexOf(search) >= 0;
       }
     });
 
@@ -138,34 +128,35 @@ export default class Meetup extends React.Component {
             data={meetups}
             renderItem={({ item }) => {
               const {
-                meetupTitle,
+                title,
                 meetupStartDate,
                 city,
+                state,
                 streetAddress1,
                 streetAddress2,
-                meetupStartTime
+                eventStartDate
               } = item || {};
               return (
                 <ListItem thumbnail onPress={this.openDetail(item)}>
                   <Left>
                     <Thumbnail
                       square
-                      source={meetupthumb}
+                      source={workshopthumb}
                       style={{ borderRadius: 6 }}
                     />
                   </Left>
                   <Body>
                     <View>
                       <Text style={styles.date}>
-                        {moment.utc(meetupStartDate).format('MMM. D')},{' '}
-                        {this.tConvert(meetupStartTime)}
+                        {moment.utc(eventStartDate).format('MMM. D')},{' '}
+                        {this.tConvert(eventStartDate)}
                       </Text>
                     </View>
                     <Text style={styles.textRight} note numberOfLines={1}>
-                      {meetupTitle}
+                      {title}
                     </Text>
                     <Text style={styles.textRightP} note numberOfLines={1}>
-                      {streetAddress1 || streetAddress2}, {city}
+                      {streetAddress1 || streetAddress2}, {city}, {state}
                     </Text>
                   </Body>
                 </ListItem>
@@ -223,3 +214,5 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end'
   }
 });
+
+export default Workshop;

@@ -51,7 +51,6 @@ class StackedBarcodeOverlay extends PureComponent {
             <Icon
               style={{ marginBottom: 10 }}
               name="information-circle-outline"
-              type="FontAwesome"
               style={{ fontSize: 40, color: '#4b5487' }}
             />
             <View style={{ marginTop: 25, marginBottom: 35 }}>
@@ -66,7 +65,6 @@ class StackedBarcodeOverlay extends PureComponent {
             <Icon
               style={{ marginBottom: 10 }}
               name="check-circle"
-              type="FontAwesome"
               style={{ fontSize: 40, color: '#58B837' }}
             />
             <View style={{ marginTop: 25, marginBottom: 35 }}>
@@ -108,6 +106,7 @@ export default class QRCodeScanner extends Component {
     hasCameraPermission: null,
     lastScanned: null,
     isScanning: false,
+    loading: false,
     showMessage: false,
     message: null,
     messageType: null
@@ -125,7 +124,7 @@ export default class QRCodeScanner extends Component {
   };
 
   _closeMessageAction = () => {
-    this.setState({ showMessage: false });
+    this.setState({ showMessage: false, loading: false });
     this.resetScanner();
   };
 
@@ -133,9 +132,10 @@ export default class QRCodeScanner extends Component {
     setTimeout(() => {
       this.setState({
         isScanning: false,
+        loading: false,
         lastScanned: null
       });
-    }, 1000);
+    }, 2000);
   };
 
   _handleBarCodeRead = async result => {
@@ -144,7 +144,11 @@ export default class QRCodeScanner extends Component {
     if (result.data !== lastScanned && !isScanning) {
       try {
         LayoutAnimation.spring();
-        this.setState({ lastScanned: result.data, isScanning: true });
+        this.setState({
+          lastScanned: result.data,
+          isScanning: true,
+          loading: true
+        });
         const payLoad = {
           eventId,
           attendeId: result.data
@@ -165,6 +169,7 @@ export default class QRCodeScanner extends Component {
         this.setState({
           message: error || data.message,
           showMessage: true,
+          loading: false,
           messageType: status === 200 ? 0 : 1
         });
       } catch (ex) {
@@ -172,6 +177,7 @@ export default class QRCodeScanner extends Component {
         this.setState({
           message: ex.message,
           showMessage: true,
+          loading: false,
           messageType: -1
         });
       }
@@ -184,7 +190,7 @@ export default class QRCodeScanner extends Component {
       setBarcodeModalVisible,
       scanModalTitle
     } = this.props;
-    const { message, messageType, showMessage, isScanning } = this.state;
+    const { message, messageType, showMessage, loading } = this.state;
     return (
       <Modal
         animationType="fade"
@@ -241,13 +247,13 @@ export default class QRCodeScanner extends Component {
             />
             {showMessage && (
               <StackedBarcodeOverlay
-                overlayIndex={1}
+                overlayIndex={3}
                 message={message}
                 messageType={messageType}
                 closeMessageAction={this._closeMessageAction}
               />
             )}
-            {isScanning && <LoadingOverlay />}
+            {loading && <LoadingOverlay />}
 
             {this._maybeRenderUrl()}
 

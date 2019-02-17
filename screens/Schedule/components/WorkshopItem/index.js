@@ -102,11 +102,7 @@ export default class WoorkshopItem extends Component {
           const pull =
             index + 1 !== speaker.length ? { marginRight: -16 } : null;
           return (
-            <Avatar
-              key={speaker.name}
-              source={{ uri: speaker.avatar }}
-              style={pull}
-            />
+            <Avatar key={speaker.name} source={speaker.avatar} style={pull} />
           );
         })
       : null;
